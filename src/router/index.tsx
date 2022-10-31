@@ -3,19 +3,21 @@ import Login from "../pages/Login";
 
 export interface IRoute{
   path: string;
-  component: React.ComponentType;
-  exact?: boolean;
+  element: React.ReactElement;
 }
 
 export enum RouteNames{
   LOGIN = '/login',
-  EVENT = '/'
+  EVENT = '/',
+  OTHER = '*',
 }
 
 export const publicRoutes: IRoute[] = [
-  {path: RouteNames.LOGIN, exact: true, component: Login}
+  {path: RouteNames.LOGIN, element: <Login/>},
+  {path: RouteNames.OTHER, element: <Login/>}
 ]
 
 export const privateRoutes: IRoute[] = [
-  {path: RouteNames.EVENT, exact: true, component: Event}
+  {path: RouteNames.EVENT, element: <Event/>},
+  {path: RouteNames.OTHER, element: <Event/>}
 ]
