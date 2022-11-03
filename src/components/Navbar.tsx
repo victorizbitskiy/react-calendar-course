@@ -6,7 +6,6 @@ import { RouteNames } from "../router";
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
-  console.log(navigate);
   const { isAuth } = useTypedSelector((state) => state.auth);
   return (
     <Layout.Header>
