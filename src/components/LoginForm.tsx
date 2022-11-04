@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import React, { FC } from "react";
+import { rules } from "../utils/rules";
 
 const LoginForm: FC = () => {
   return (
@@ -8,7 +9,7 @@ const LoginForm: FC = () => {
         label="Имя пользователя"
         name="username"
         rules={[
-          { required: true, message: "Пожалуйста введите имя пользователя!" },
+          rules.required("Пожалуйста введите имя пользователя!"),
         ]}
       >
         <Input />
@@ -16,7 +17,7 @@ const LoginForm: FC = () => {
       <Form.Item
         label="Пароль"
         name="password"
-        rules={[{ required: true, message: "Пожалуйста введите пароль!" }]}
+        rules={[rules.required("Пожалуйста введите пароль!")]}
       >
         <Input />
       </Form.Item>
