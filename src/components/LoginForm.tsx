@@ -8,7 +8,7 @@ const LoginForm: FC = () => {
   const dispatch = useDispatch<any>();
 
   const submit = () => {
-    dispatch(AuthActionCreators.login("", ""));
+    dispatch(AuthActionCreators.login("user", "123"));
   };
 
   return (
