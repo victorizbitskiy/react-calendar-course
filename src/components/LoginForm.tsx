@@ -1,18 +1,17 @@
 import { Button, Form, Input } from "antd";
 import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/userTypedSelector";
-import { AuthActionCreators } from "../store/reduces/auth/action-creators";
 import { rules } from "../utils/rules";
 
 const LoginForm: FC = () => {
-  const dispatch = useDispatch<any>();
   const { error, isLoading } = useTypedSelector((state) => state.auth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useActions();
 
   const submit = () => {
-    dispatch(AuthActionCreators.login(username, password));
+    login(username, password);
   };
 
   return (
@@ -30,7 +29,11 @@ const LoginForm: FC = () => {
         name="password"
         rules={[rules.required("Пожалуйста введите пароль")]}
       >
-        <Input value={password} onChange={(e) => setPassword(e.target.value)} type={"password"}/>
+        <Input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type={"password"}
+        />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" loading={isLoading}>
