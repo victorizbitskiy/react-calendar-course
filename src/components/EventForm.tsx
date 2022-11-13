@@ -4,6 +4,8 @@ import { rules } from "../utils/rules";
 import type { SelectProps } from "antd";
 import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
+import { Moment } from "moment";
+import { formatDate } from "../utils/date";
 
 interface EventFormProps {
   guests: IUser[];
@@ -19,15 +21,19 @@ const EventForm: FC<EventFormProps> = (props) => {
     })
   );
 
-  // const handleChange = (value: string[]) => {
-  //   console.log(`selected ${value}`);
-  // };
   const [event, setEvent] = useState<IEvent>({
     author: "",
     date: "",
     description: "",
     guest: "",
   } as IEvent);
+
+  const selectDate = (date: Moment | null) => {
+    if (date) {
+      console.log();
+      setEvent({ ...event, date: formatDate(date.toDate()) });
+    }
+  };
 
   return (
     <Form>
@@ -36,22 +42,23 @@ const EventForm: FC<EventFormProps> = (props) => {
         name="description"
         rules={[rules.required()]}
       >
-        <Input />
+        <Input
+          onChange={(e) => setEvent({ ...event, description: e.target.value })}
+          value={event.description}
+        />
       </Form.Item>
       <Form.Item label="Дата события" name="date" rules={[rules.required()]}>
-        <DatePicker />
+        <DatePicker onChange={(date) => selectDate(date)} />
       </Form.Item>
-      <Form.Item
-        label="Выберите гостя"
-        name="guest"
-        rules={[rules.required()]}
-      >
+      <Form.Item label="Выберите гостя" name="guest" rules={[rules.required()]}>
         <Select
           mode="multiple"
           allowClear
           style={{ width: "100%" }}
           placeholder="Please select"
-          onChange={(guest: string) => {setEvent({...event, guest})}}
+          onChange={(guest: string) => {
+            setEvent({ ...event, guest });
+          }}
           options={options}
         ></Select>
       </Form.Item>
