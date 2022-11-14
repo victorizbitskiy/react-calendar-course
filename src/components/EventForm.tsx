@@ -6,9 +6,11 @@ import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
 import { Moment } from "moment";
 import { formatDate } from "../utils/date";
+import { useTypedSelector } from "../hooks/userTypedSelector";
 
 interface EventFormProps {
   guests: IUser[];
+  submit: (event: IEvent) => void;
 }
 
 const EventForm: FC<EventFormProps> = (props) => {
@@ -28,15 +30,20 @@ const EventForm: FC<EventFormProps> = (props) => {
     guest: "",
   } as IEvent);
 
+  const { user } = useTypedSelector((state) => state.auth);
+
   const selectDate = (date: Moment | null) => {
     if (date) {
-      console.log();
       setEvent({ ...event, date: formatDate(date.toDate()) });
     }
   };
 
+  const submitForm = () => {
+    props.submit({ ...event, author: user.username });
+  };
+
   return (
-    <Form>
+    <Form onFinish={submitForm}>
       <Form.Item
         label="Описание события"
         name="description"

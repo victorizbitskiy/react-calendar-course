@@ -4,16 +4,21 @@ import EventCalendar from "../components/EventCalendar";
 import EventForm from "../components/EventForm";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/userTypedSelector";
+import { IEvent } from "../models/IEvent";
 
 const Event: FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { fetchGuests } = useActions();
-  const { guests } = useTypedSelector((state) => state.event);
+  const { fetchGuests, createEvent } = useActions();
+  const { guests, events } = useTypedSelector((state) => state.event);
 
   useEffect(() => {
     fetchGuests();
   }, []);
 
+  const addNewEvent = (event: IEvent) => {
+    setModalVisible(false);
+    createEvent(event);
+  };
   return (
     <Layout>
       <EventCalendar events={[]} />
@@ -26,7 +31,7 @@ const Event: FC = () => {
         footer={null}
         onCancel={() => setModalVisible(false)}
       >
-        <EventForm guests={guests} />
+        <EventForm guests={guests} submit={addNewEvent} />
       </Modal>
     </Layout>
   );
