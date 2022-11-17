@@ -1,0 +1,10 @@
+{
+  "json.schemas": [
+    {
+      "typescript.suggest.completeFunctionCalls": true,
+      "javascript.suggest.completeFunctionCalls": true,
+      "typescript.useCodeSnippetsOnMethodSuggest":true,
+      "javascript.useCodeSnippetsOnMethodSuggest": true,
+    }
+  ]
+}

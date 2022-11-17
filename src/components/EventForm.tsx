@@ -1,12 +1,12 @@
-import { Button, DatePicker, Form, Input, Row, Select } from "antd";
-import { FC, useState } from "react";
-import { rules } from "../utils/rules";
 import type { SelectProps } from "antd";
-import { IUser } from "../models/IUser";
-import { IEvent } from "../models/IEvent";
+import { Button, DatePicker, Form, Input, Row, Select } from "antd";
 import { Moment } from "moment";
-import { formatDate } from "../utils/date";
+import { FC, useState } from "react";
 import { useTypedSelector } from "../hooks/userTypedSelector";
+import { IEvent } from "../models/IEvent";
+import { IUser } from "../models/IUser";
+import { formatDate } from "../utils/date";
+import { rules } from "../utils/rules";
 
 interface EventFormProps {
   guests: IUser[];
@@ -54,7 +54,10 @@ const EventForm: FC<EventFormProps> = (props) => {
           value={event.description}
         />
       </Form.Item>
-      <Form.Item label="Дата события" name="date" rules={[rules.required()]}>
+      <Form.Item 
+      label="Дата события" 
+      name="date" 
+      rules={[rules.required(), rules.isDataAfter("Нельзя создать событие в прошлом")]}>
         <DatePicker onChange={(date) => selectDate(date)} />
       </Form.Item>
       <Form.Item label="Выберите гостя" name="guest" rules={[rules.required()]}>
