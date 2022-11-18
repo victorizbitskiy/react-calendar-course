@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-calendar-course/static/css/main.4c8fd0df.css",
+    "main.js": "/react-calendar-course/static/js/main.98e4069e.js",
+    "index.html": "/react-calendar-course/index.html",
+    "main.4c8fd0df.css.map": "/react-calendar-course/static/css/main.4c8fd0df.css.map",
+    "main.98e4069e.js.map": "/react-calendar-course/static/js/main.98e4069e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c8fd0df.css",
+    "static/js/main.98e4069e.js"
+  ]
+}
